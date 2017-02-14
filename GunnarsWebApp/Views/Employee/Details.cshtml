@@ -1,0 +1,87 @@
+﻿@model GunnarsWebApp.Models.Employee
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+    </dl>
+    <h4>Adresser</h4>
+    <table border="1">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Addresses.First().City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Addresses.First().Street)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Addresses.First().Zip)
+            </th>
+        </tr>
+        @foreach (var adress in Model.Addresses)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(a => adress.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(a => adress.Street)
+                </td>
+                <td>
+                    @Html.DisplayFor(a => adress.Zip)
+                </td>
+            </tr>
+        }
+    </table>
+    <h4>Kontakter</h4>
+    <table border="1">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Contacts.First().Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contacts.First().Email)
+            </th>
+        </tr>
+        @foreach (var contact in Model.Contacts)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(c => contact.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(c => contact.Email)
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>
+<p>
+    <br/>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Editera Addresser", "Index","Address", new { id = Model.Id }, new { }) |
+    @Html.ActionLink("Editera Kontakter", "Index", "Contact", new { id = Model.Id }, new { }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
