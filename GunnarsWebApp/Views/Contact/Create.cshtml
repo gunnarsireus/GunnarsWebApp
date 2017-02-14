@@ -36,8 +36,10 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-2">
-            <input type="button" onclick="window.location='../../Contact/'" value="Tillbaka" onmouseover="this.style.backgroundColor = ' gray'; this.style.color='white' ;" onmouseout="this.style.backgroundColor = 'white'; this.style.color = 'black';"
+                @{string local = "window.location='../../Contact/Index/" + Model.EmployeeId + "'";
+                <input type="button" onclick="@local" value="Tillbaka" onmouseover="this.style.backgroundColor = ' gray'; this.style.color='white' ;" onmouseout="this.style.backgroundColor = 'white'; this.style.color = 'black';"
                            class="oldButton" />
+                }
 
             </div>
             <div class="col-md-5">

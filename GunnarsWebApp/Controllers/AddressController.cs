@@ -51,7 +51,7 @@ namespace GunnarsWebApp.Controllers
             if (!ModelState.IsValid) return View(address);
             _db.Addresses.Add(address);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = address.EmployeeId });
         }
 
         // GET: Addresses/Edit/5
@@ -79,7 +79,7 @@ namespace GunnarsWebApp.Controllers
             if (!ModelState.IsValid) return View(address);
             _db.Entry(address).State = EntityState.Modified;
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new {id = address.EmployeeId });
         }
 
         // GET: Addresses/Delete/5
@@ -90,6 +90,10 @@ namespace GunnarsWebApp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var address = _db.Addresses.Find(id);
+            if (_db.Addresses.Count(a=>a.EmployeeId==address.EmployeeId)==1)
+            {
+                return RedirectToAction("Index", new { id = address.EmployeeId });
+            }
             if (address == null)
             {
                 return HttpNotFound();
@@ -105,7 +109,7 @@ namespace GunnarsWebApp.Controllers
             var address = _db.Addresses.Find(id);
             _db.Addresses.Remove(address);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id= address.EmployeeId});
         }
 
         protected override void Dispose(bool disposing)

@@ -11,6 +11,11 @@ namespace GunnarsWebApp.Models
     [Table("Contacts")]
     public class Contact
     {
+        public Contact()
+        {
+            Phone = "-";
+            Email = "-";
+        }
         public int Id { get; set; }
         public int EmployeeId { get; set; }
 

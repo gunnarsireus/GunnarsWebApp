@@ -11,6 +11,12 @@ namespace GunnarsWebApp.Models
     [Table("Addresses")]
     public class Address
     {
+        public Address()
+        {
+            City = "-";
+            Street = "-";
+            Zip = "-";
+        }
         public int Id { get; set; }
         public int EmployeeId { get; set; }
 

@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using GunnarsWebApp.Models;
 using GunnarsWebApp.DAL;
+using System.Data.Entity.Validation;
+
 namespace GunnarsWebApp.Controllers
 {
     public class EmployeeController : Controller
@@ -53,10 +55,16 @@ namespace GunnarsWebApp.Controllers
         public ActionResult Create([Bind(Include = "Id,AddressId, ContactId,FirstName,LastName,UserName")] Employee employee)
         {
             if (!ModelState.IsValid) return View(employee);
+            var address = new Address { EmployeeId = employee.Id };
+            var contact = new Contact { EmployeeId = employee.Id };
             _db.Employees.Add(employee);
-            _db.Addresses.Add(new Address { EmployeeId = employee.Id });
-            _db.Contacts.Add(new Contact { EmployeeId = employee.Id });
             _db.SaveChanges();
+            address.EmployeeId = employee.Id;
+            contact.EmployeeId = employee.Id;
+            _db.Addresses.Add(address);
+            _db.Contacts.Add(contact);
+            _db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 

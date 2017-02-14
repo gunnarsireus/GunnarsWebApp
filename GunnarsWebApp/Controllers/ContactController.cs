@@ -36,9 +36,9 @@ namespace GunnarsWebApp.Controllers
         }
 
         // GET: Contacts/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            return View();
+            return View(new Contact { EmployeeId = id });
         }
 
         // POST: Contacts/Create
@@ -51,7 +51,7 @@ namespace GunnarsWebApp.Controllers
             if (!ModelState.IsValid) return View(contact);
             _db.Contacts.Add(contact);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = contact.EmployeeId });
         }
 
         // GET: Contacts/Edit/5
@@ -79,7 +79,7 @@ namespace GunnarsWebApp.Controllers
             if (!ModelState.IsValid) return View(contact);
             _db.Entry(contact).State = EntityState.Modified;
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = contact.EmployeeId });
         }
 
         // GET: Contacts/Delete/5
@@ -90,6 +90,10 @@ namespace GunnarsWebApp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var contact = _db.Contacts.Find(id);
+            if (_db.Contacts.Count(a => a.EmployeeId == contact.EmployeeId) == 1)
+            {
+                return RedirectToAction("Index", new { id = contact.EmployeeId });
+            }
             if (contact == null)
             {
                 return HttpNotFound();
@@ -105,7 +109,7 @@ namespace GunnarsWebApp.Controllers
             var contact = _db.Contacts.Find(id);
             _db.Contacts.Remove(contact);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = contact.EmployeeId });
         }
 
         protected override void Dispose(bool disposing)
