@@ -38,22 +38,50 @@
             <th>
                 @Html.DisplayNameFor(model => model.Addresses.First().Zip)
             </th>
+            <th>
+                <strong>Karta</strong>
+            </th>
         </tr>
+        @{ int cnt = 0;}
         @foreach (var adress in Model.Addresses)
         {
             <tr>
-                <td>
+                @{string idCity = "city" + cnt;
+                }
+                <td id="@idCity">
                     @Html.DisplayFor(a => adress.City)
                 </td>
-                <td>
+                @{string idStreet = "street" + cnt;
+                }
+                <td id="@idStreet">
                     @Html.DisplayFor(a => adress.Street)
                 </td>
-                <td>
+                @{string idZip = "zip" + cnt;
+                }
+                <td id="@idZip">
                     @Html.DisplayFor(a => adress.Zip)
                 </td>
+                <td>
+                    <input id="@cnt.ToString()" value="Karta" type="button" onclick="showMap(this)" />
+                 </td>
             </tr>
+            cnt++;
         }
     </table>
+    <script type="text/javascript">
+        function showMap(that) {
+            var id = that.id;
+            var street = $("#street" + id).html().trim().replace(" ", "+");
+            var zip = $("#zip" + id).html().trim().replace(" ", "+");
+            var city = $("#city" + id).html().trim().replace(" ", "+");
+            var url = "https://www.google.se/maps/place/" + street + ",+" + zip +"+"+ city;
+            openInNewTab(url);
+        }
+        function openInNewTab(url) {
+            var win = window.open(url, '_blank');
+            win.focus();
+        }
+    </script>
     <h4>Kontakter</h4>
     <table border="1">
         <tr>
