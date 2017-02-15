@@ -19,11 +19,11 @@ namespace GunnarsWebApp.Models
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "First Name")]
+        [Display(Name = "Förnamn")]
         public string FirstName { get; set; }
 
         [Required]
-        [Display(Name = "Last Name")]
+        [Display(Name = "Efternamn")]
         public string LastName { get; set; }
 
         [Required]
