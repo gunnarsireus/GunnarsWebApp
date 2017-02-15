@@ -21,17 +21,17 @@ namespace GunnarsWebApp.Models
         public int EmployeeId { get; set; }
 
         [Required]
-        [Display(Name = "City")]
+        [Display(Name = "Ort")]
         public string City { get; set; }
 
 
         [Required]
-        [Display(Name = "Street")]
+        [Display(Name = "Gata")]
         public string Street { get; set; }
 
 
         [Required]
-        [Display(Name = "Zip")]
+        [Display(Name = "Postnr")]
         public string Zip { get; set; }
 
     }

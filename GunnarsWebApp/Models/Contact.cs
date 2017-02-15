@@ -20,11 +20,11 @@ namespace GunnarsWebApp.Models
         public int EmployeeId { get; set; }
 
         [Required]
-        [Display(Name = "Phone")]
+        [Display(Name = "Telefon")]
         public string Phone { get; set; }
 
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "Epost")]
         public string Email { get; set; }
     }
 }
