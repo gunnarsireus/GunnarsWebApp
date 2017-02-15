@@ -39,28 +39,13 @@
             </table>
             <div class="form-group">
                 <div class="col-md-4">
-                    @{  string local;
-                        if (Model.Any())
-                        {
-                            local = "window.location='../../Contact/Create/" + Model.First().EmployeeId + "'";
-                        }
-                        else
-                        {
-                            local = "window.location='../../Employee/Index'";
-                        }
+                    @{  string local = "window.location='../../Contact/Create/" + Model.First().EmployeeId + "'";
                         <input type="button" onclick="@local" value="Skapa ny kontakt" onmouseover="this.style.backgroundColor = 'gray'; this.style.color = 'white'; " onmouseout="this.style.backgroundColor = 'white'; this.style.color = 'black'; " style="background - color:White; border - style:Outset; font - family:Verdana; font - size:10px; font - weight:bold; height: 21px; width: 160px; " />
                     }
                 </div>
                 <div class="col-md-4">
                     <div class="col-md-4">
-                        @if (Model.Any())
-                        {
-                            @Html.ActionLink("Tillbaka", "Details", "Employee", new { id = Model.First().EmployeeId }, null)
-                        }
-                        else
-                        {
-                            @Html.ActionLink("Tillbaka", "Index", "Employee")
-                        }
+                         @Html.ActionLink("Tillbaka", "Details", "Employee", new { id = Model.First().EmployeeId }, null)
                     </div>
                 </div>
             </div>

@@ -42,7 +42,11 @@ CREATE TABLE [dbo].[Contacts](
 (
 	Id ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+CONSTRAINT [FK_dbo.ContatcsEmployees] FOREIGN KEY (EmployeeId)     
+    REFERENCES Employees (Id)     
+    ON DELETE CASCADE    
 ) ON [PRIMARY]
+
 
 
 /****** Object:  Table [dbo].[Addresses]    Script Date: 2016-08-01 14:26:49 ******/
@@ -61,6 +65,9 @@ CREATE TABLE [dbo].[Addresses](
 (
 	Id ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+CONSTRAINT [FK_dbo.AdddressesEmployees] FOREIGN KEY (EmployeeId)     
+    REFERENCES Employees (Id)     
+    ON DELETE CASCADE  
 ) ON [PRIMARY]
 
 

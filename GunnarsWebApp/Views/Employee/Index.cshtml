@@ -43,25 +43,10 @@
                         @Html.DisplayFor(modelItem => item.UserName)
                     </td>
                     <td>
-                        @if (item.Addresses.Any())
-                        {
-                            @Html.DisplayFor(modelItem => item.Addresses.First().City)
-                        }
-                        else
-                        {
-                            @Html.Raw("-");
-                        }
-
+                        @Html.DisplayFor(modelItem => item.Addresses.First().City)
                     </td>
                     <td>
-                        @if (item.Addresses.Any())
-                        {
-                            @Html.DisplayFor(modelItem => item.Contacts.First().Phone)
-                        }
-                        else
-                        {
-                            @Html.Raw("-");
-                        }
+                        @Html.DisplayFor(modelItem => item.Contacts.First().Phone)
                     </td>
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

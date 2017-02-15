@@ -4,112 +4,123 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Personal - Alla uppgifter</h2>
-
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-    </dl>
-    <h4>Adresser</h4>
-    <table border="1">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Addresses.First().City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Addresses.First().Street)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Addresses.First().Zip)
-            </th>
-            <th>
-                <strong>Karta</strong>
-            </th>
-        </tr>
-        @{ int cnt = 0;}
-        @foreach (var adress in Model.Addresses)
-        {
-            <tr>
-                @{string idCity = "city" + cnt;
+<br />
+<br />
+<table class="table table-responsive table-bordered">
+    <tr>
+        <td>
+            <h2>Personal - Alla uppgifter</h2>
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => model.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.LastName)
+                    </td>
+                </tr>
+            </table>
+            <h4>Adresser</h4>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Addresses.First().City)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Addresses.First().Street)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Addresses.First().Zip)
+                        </th>
+                        <th>
+                            <strong>Karta</strong>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int cnt = 0;}
+                    @foreach (var adress in Model.Addresses)
+            {
+                        <tr>
+                            @{string idCity = "city" + cnt;
+                            }
+                            <td id="@idCity">
+                                @Html.DisplayFor(a => adress.City)
+                            </td>
+                            @{string idStreet = "street" + cnt;
+                            }
+                            <td id="@idStreet">
+                                @Html.DisplayFor(a => adress.Street)
+                            </td>
+                            @{string idZip = "zip" + cnt;
+                            }
+                            <td id="@idZip">
+                                @Html.DisplayFor(a => adress.Zip)
+                            </td>
+                            <td>
+                                <input id="@cnt.ToString()" value="Karta" type="button" onclick="showMap(this)" />
+                            </td>
+                        </tr>
+                                    cnt++;
+                                }
+                </tbody>
+            </table>
+            <script type="text/javascript">
+                function showMap(that) {
+                    var id = that.id;
+                    var street = $("#street" + id).html().trim().replace(" ", "+");
+                    var zip = $("#zip" + id).html().trim().replace(" ", "+");
+                    var city = $("#city" + id).html().trim().replace(" ", "+");
+                    var url = "https://www.google.se/maps/place/" + street + ",+" + zip + "+" + city;
+                    openInNewTab(url);
                 }
-                <td id="@idCity">
-                    @Html.DisplayFor(a => adress.City)
-                </td>
-                @{string idStreet = "street" + cnt;
+                function openInNewTab(url) {
+                    var win = window.open(url, '_blank');
+                    win.focus();
                 }
-                <td id="@idStreet">
-                    @Html.DisplayFor(a => adress.Street)
-                </td>
-                @{string idZip = "zip" + cnt;
-                }
-                <td id="@idZip">
-                    @Html.DisplayFor(a => adress.Zip)
-                </td>
-                <td>
-                    <input id="@cnt.ToString()" value="Karta" type="button" onclick="showMap(this)" />
-                 </td>
-            </tr>
-            cnt++;
-        }
-    </table>
-    <script type="text/javascript">
-        function showMap(that) {
-            var id = that.id;
-            var street = $("#street" + id).html().trim().replace(" ", "+");
-            var zip = $("#zip" + id).html().trim().replace(" ", "+");
-            var city = $("#city" + id).html().trim().replace(" ", "+");
-            var url = "https://www.google.se/maps/place/" + street + ",+" + zip +"+"+ city;
-            openInNewTab(url);
-        }
-        function openInNewTab(url) {
-            var win = window.open(url, '_blank');
-            win.focus();
-        }
-    </script>
-    <h4>Kontakter</h4>
-    <table border="1">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Contacts.First().Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Contacts.First().Email)
-            </th>
-        </tr>
-        @foreach (var contact in Model.Contacts)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(c => contact.Phone)
-                </td>
-                <td>
-                    @Html.DisplayFor(c => contact.Email)
-                </td>
-            </tr>
-        }
-    </table>
-
-</div>
-<p>
-    <br/>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Editera Addresser", "Index","Address", new { id = Model.Id }, new { }) |
-    @Html.ActionLink("Editera Kontakter", "Index", "Contact", new { id = Model.Id }, new { }) |
-    @Html.ActionLink("Tillbaka", "Index")
-</p>
+            </script>
+            <h4>Kontakter</h4>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Contacts.First().Phone)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Contacts.First().Email)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var contact in Model.Contacts)
+            {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(c => contact.Phone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(c => contact.Email)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <p>
+                <br />
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                @Html.ActionLink("Editera Addresser", "Index", "Address", new { id = Model.Id }, new { }) |
+                @Html.ActionLink("Editera Kontakter", "Index", "Contact", new { id = Model.Id }, new { }) |
+                @Html.ActionLink("Tillbaka", "Index")
+            </p>
+        </td>
+    </tr>
+</table>
