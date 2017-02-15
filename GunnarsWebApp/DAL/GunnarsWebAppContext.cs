@@ -12,5 +12,7 @@ namespace GunnarsWebApp.DAL
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+
+        public System.Data.Entity.DbSet<GunnarsWebApp.Models.SubmissionModel> SubmissionModels { get; set; }
     }
 }

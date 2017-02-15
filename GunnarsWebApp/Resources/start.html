@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Foto Admin</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body onload="loadXMLDoc()">
+    <div class="container">
+        <table id="demo" class="table table-bordered"></table>
+        <script>
+            function loadXMLDoc() {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        myFunction(this);
+                    }
+                };
+                xmlhttp.open("GET", "AllSubmissions.xml", true);
+                xmlhttp.send();
+            }
+            function myFunction(xml) {
+                var i;
+                var xmlDoc = xml.responseXML;
+                var table = "<tr><th>Sökande</th><th>Beskrivning</th></tr>";
+                var x = xmlDoc.getElementsByTagName("SubmissionModel");
+                var datum;
+                var name;
+                var address;
+                var postalcode;
+                var city;
+                var phone;
+                var email;
+                var filename;
+                var type;
+                var projectname;
+                var description;
+                var link;
+                for (i = 0; i < x.length; i++) {
+                    datum = x[i].getElementsByTagName("SubmissionDate")[0].childNodes[0].nodeValue;
+                    name = x[i].getElementsByTagName("Name")[0].childNodes[0].nodeValue;
+                    address = x[i].getElementsByTagName("Address")[0].childNodes[0].nodeValue;
+                    postalcode = x[i].getElementsByTagName("PostalCode")[0].childNodes[0].nodeValue;
+                    city = x[i].getElementsByTagName("City")[0].childNodes[0].nodeValue;
+                    phone = x[i].getElementsByTagName("PhoneNumber")[0].childNodes[0].nodeValue;
+                    email = x[i].getElementsByTagName("Email")[0].childNodes[0].nodeValue;
+                    type = ' <span class="label label-default pull-right">' + x[i].getElementsByTagName("ProjectType")[0].childNodes[0].nodeValue + '</span>';
+                    projectname = x[i].getElementsByTagName("ProjectName")[0].childNodes[0].nodeValue;
+                    description = x[i].getElementsByTagName("ProjectDescription")[0].childNodes[0].nodeValue;
+                    file = '';
+                    if (x[i].getElementsByTagName("ProjectFileName").length > 0) {
+                        file = '<a href="/Uploads/' + x[i].getElementsByTagName("ProjectFileName")[0].childNodes[0].nodeValue + '"><span class="label label-success pull-right" style="margin-right:5px"> Filen </span></a>';
+                    }
+                    link = '';
+                    if (x[i].getElementsByTagName("ProjectWebSiteURL").length > 0) {
+                        link = '<a href="' + x[i].getElementsByTagName("ProjectWebSiteURL")[0].childNodes[0].nodeValue + '" target="_blank"><span class="label label-info pull-right" style="margin-right:5px"> Länken </span></a>';
+                    }
+                    table +=
+                        '<tr>' +
+                            '<td>' +
+                                '<h4>' + name + '</h4>' +
+                                address + '<br />' +
+                                postalcode + ' ' + city + '<br /><br />' +
+                                phone + '<br />' +
+                                '<a href="mailto:' + email + '">' + email + '</a><br /><br />' +
+                                datum.substring(0, 10) + ' ' + datum.substring(11, 16) +
+                            '</td>' +
+                            '<td>' +
+                                '<h4>' + projectname + type + link + file + '</h4>' +
+                                '<pre style="white-space:pre-wrap">' + description + '</pre>' +
+                            '</td>' +
+                        "</tr>";
+                }
+                document.getElementById("demo").innerHTML = table;
+            }
+        </script>
+    </div>
+</body>
+</html>

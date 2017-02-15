@@ -173,6 +173,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\XmlController.cs" />
     <Compile Include="DAL\GunnarsWebAppContext.cs" />
     <Compile Include="DAL\GunnarsWebAppInitilizer.cs" />
     <Compile Include="Global.asax.cs">
@@ -184,6 +185,8 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\SubmissionModel.cs" />
+    <Compile Include="Models\Xml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -195,6 +198,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Resources\AllSubmissions.xml" />
+    <Content Include="Resources\start.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -256,6 +261,11 @@
     <Content Include="Views\Contact\Delete.cshtml" />
     <Content Include="Views\Contact\Edit.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Xml\Create.cshtml" />
+    <Content Include="Views\Xml\Delete.cshtml" />
+    <Content Include="Views\Xml\Details.cshtml" />
+    <Content Include="Views\Xml\Edit.cshtml" />
+    <Content Include="Views\Xml\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
