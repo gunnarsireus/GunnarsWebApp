@@ -55,6 +55,7 @@ namespace GunnarsWebApp.Controllers
         public ActionResult Create([Bind(Include = "Id,AddressId, ContactId,FirstName,LastName,UserName")] Employee employee)
         {
             if (!ModelState.IsValid) return View(employee);
+            employee.DepartmentId = 1;
             var address = new Address { EmployeeId = employee.Id };
             var contact = new Contact { EmployeeId = employee.Id };
             _db.Employees.Add(employee);

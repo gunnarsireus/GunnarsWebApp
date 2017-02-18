@@ -17,6 +17,9 @@ namespace GunnarsWebApp.Models
             Contacts = new List<Contact>();
         }
         public int Id { get; set; }
+        public int DepartmentId { get; set; }
+        [ForeignKey("DepartmentId")]
+        public virtual Department department { get; set; }
 
         [Required]
         [Display(Name = "Förnamn")]

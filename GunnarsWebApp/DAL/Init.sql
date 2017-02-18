@@ -15,8 +15,21 @@ if EXISTS (select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME = 'Contacts'
 if EXISTS (select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME = 'Employees' AND TABLE_SCHEMA = 'dbo')
     drop table dbo.Employees;
 
+if EXISTS (select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME = 'Departments' AND TABLE_SCHEMA = 'dbo')
+    drop table dbo.Departments;
+
+CREATE TABLE [dbo].[Departments](
+	Id [int] IDENTITY(1,1) NOT NULL,
+	Name [nvarchar](50) NULL,
+ CONSTRAINT [PK_dbo.Departments] PRIMARY KEY CLUSTERED 
+(
+	Id ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
 CREATE TABLE [dbo].[Employees](
 	Id [int] IDENTITY(1,1) NOT NULL,
+	DepartmentId [int] NOT NULL,
 	FirstName [nvarchar](50) NULL,
     LastName [nvarchar](50) NULL,
 	UserName [nvarchar](50) NULL
@@ -24,6 +37,9 @@ CREATE TABLE [dbo].[Employees](
 (
 	Id ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+CONSTRAINT [FK_dbo.DepartmentsEmployees] FOREIGN KEY (DepartmentId)     
+    REFERENCES Departments (Id)     
+    ON DELETE CASCADE 
 ) ON [PRIMARY]
 
 
@@ -42,7 +58,7 @@ CREATE TABLE [dbo].[Contacts](
 (
 	Id ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-CONSTRAINT [FK_dbo.ContatcsEmployees] FOREIGN KEY (EmployeeId)     
+CONSTRAINT [FK_dbo.ContactsEmployees] FOREIGN KEY (EmployeeId)     
     REFERENCES Employees (Id)     
     ON DELETE CASCADE    
 ) ON [PRIMARY]
@@ -65,20 +81,24 @@ CREATE TABLE [dbo].[Addresses](
 (
 	Id ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-CONSTRAINT [FK_dbo.AdddressesEmployees] FOREIGN KEY (EmployeeId)     
+CONSTRAINT [FK_dbo.AddressesEmployees] FOREIGN KEY (EmployeeId)     
     REFERENCES Employees (Id)     
     ON DELETE CASCADE  
 ) ON [PRIMARY]
 
+SET IDENTITY_INSERT [dbo].[Departments] ON 
+INSERT [dbo].[Departments] (Id,Name) VALUES (1,N'HR')
+INSERT [dbo].[Departments] (Id,Name) VALUES (2,N'Teknik')
+SET IDENTITY_INSERT [dbo].[Departments] OFF
 
 SET IDENTITY_INSERT [dbo].[Employees] ON 
-INSERT [dbo].[Employees] (Id,FirstName,LastName,UserName) VALUES (1,N'Gunnar', N'Siréus', N'gunnar')
-INSERT [dbo].[Employees] (Id,FirstName,LastName,UserName) VALUES (2,N'Robert', N'Nilsson', N'robert')
+INSERT [dbo].[Employees] (Id,DepartmentId,FirstName,LastName,UserName) VALUES (1,1,N'Gunnar', N'Siréus', N'gunnar')
+INSERT [dbo].[Employees] (Id,DepartmentId,FirstName,LastName,UserName) VALUES (2,2,N'Robert', N'Bornholm', N'robert')
 SET IDENTITY_INSERT [dbo].[Employees] OFF
 
 SET IDENTITY_INSERT [dbo].[Contacts] ON 
 INSERT [dbo].[Contacts] (Id, EmployeeId,Phone, Email) VALUES (1,1, N'070 7823206', N'gunnar.sireus@gmail.com')
-INSERT [dbo].[Contacts] (Id, EmployeeId,Phone, Email) VALUES (2,2, N'070 998877', N'robert.nilsson@gmail.com')
+INSERT [dbo].[Contacts] (Id, EmployeeId,Phone, Email) VALUES (2,2, N'070 998877', N'robert.bornholm@gmail.com')
 SET IDENTITY_INSERT [dbo].[Contacts] OFF
 
 SET IDENTITY_INSERT [dbo].[Addresses] ON 
