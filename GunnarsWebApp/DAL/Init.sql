@@ -87,23 +87,38 @@ CONSTRAINT [FK_dbo.AddressesEmployees] FOREIGN KEY (EmployeeId)
 ) ON [PRIMARY]
 
 SET IDENTITY_INSERT [dbo].[Departments] ON 
-INSERT [dbo].[Departments] (Id,Name) VALUES (1,N'HR')
-INSERT [dbo].[Departments] (Id,Name) VALUES (2,N'Teknik')
+INSERT [dbo].[Departments] (Id,Name) VALUES (1,N'IT')
+INSERT [dbo].[Departments] (Id,Name) VALUES (2,N'HR')
+INSERT [dbo].[Departments] (Id,Name) VALUES (3,N'XX')
 SET IDENTITY_INSERT [dbo].[Departments] OFF
 
 SET IDENTITY_INSERT [dbo].[Employees] ON 
-INSERT [dbo].[Employees] (Id,DepartmentId,FirstName,LastName,UserName) VALUES (1,1,N'Gunnar', N'Siréus', N'gunnar')
-INSERT [dbo].[Employees] (Id,DepartmentId,FirstName,LastName,UserName) VALUES (2,2,N'Robert', N'Bornholm', N'robert')
+INSERT [dbo].[Employees] (Id,DepartmentId,FirstName,LastName,UserName) VALUES (1,1,N'Mark', N'Andersson', N'mark')
+INSERT [dbo].[Employees] (Id,DepartmentId,FirstName,LastName,UserName) VALUES (2,2,N'Steve', N'Andersson', N'steve')
+INSERT [dbo].[Employees] (Id,DepartmentId,FirstName,LastName,UserName) VALUES (3,1,N'Ben', N'Andersson', N'ben')
+INSERT [dbo].[Employees] (Id,DepartmentId,FirstName,LastName,UserName) VALUES (4,1,N'Phillip', N'Andersson', N'phillip')
+INSERT [dbo].[Employees] (Id,DepartmentId,FirstName,LastName,UserName) VALUES (5,2,N'Mary', N'Andersson', N'mary')
+INSERT [dbo].[Employees] (Id,DepartmentId,FirstName,LastName,UserName) VALUES (6,1,N'Gunnar', N'Siréus', N'gunnar')
+INSERT [dbo].[Employees] (Id,DepartmentId,FirstName,LastName,UserName) VALUES (7,2,N'Robert', N'Lind', N'robert')
 SET IDENTITY_INSERT [dbo].[Employees] OFF
 
 SET IDENTITY_INSERT [dbo].[Contacts] ON 
-INSERT [dbo].[Contacts] (Id, EmployeeId,Phone, Email) VALUES (1,1, N'070 7823206', N'gunnar.sireus@gmail.com')
-INSERT [dbo].[Contacts] (Id, EmployeeId,Phone, Email) VALUES (2,2, N'070 998877', N'robert.bornholm@gmail.com')
+INSERT [dbo].[Contacts] (Id, EmployeeId,Phone, Email) VALUES (1,1, N'-', N'-')
+INSERT [dbo].[Contacts] (Id, EmployeeId,Phone, Email) VALUES (2,2, N'-', N'-')
+INSERT [dbo].[Contacts] (Id, EmployeeId,Phone, Email) VALUES (3,3, N'-', N'-')
+INSERT [dbo].[Contacts] (Id, EmployeeId,Phone, Email) VALUES (4,4, N'-', N'-')
+INSERT [dbo].[Contacts] (Id, EmployeeId,Phone, Email) VALUES (5,5, N'-', N'-')
+INSERT [dbo].[Contacts] (Id, EmployeeId,Phone, Email) VALUES (6,6, N'070 7823206', N'gunnar.sireus@gmail.com')
+INSERT [dbo].[Contacts] (Id, EmployeeId,Phone, Email) VALUES (7,7, N'070 998877', N'robert.lind@gmail.com')
 SET IDENTITY_INSERT [dbo].[Contacts] OFF
 
 SET IDENTITY_INSERT [dbo].[Addresses] ON 
-
-INSERT [dbo].[Addresses] (Id,EmployeeId, [City], [Street], [Zip]) VALUES (1,1, N'Bromma', N'Grimstahamnsvägen 4', N'168 39')
-INSERT [dbo].[Addresses] (Id,EmployeeId, [City], [Street], [Zip]) VALUES (2,2, N'Huddinge', N'Huddingevägen 4', N'123 45')
+INSERT [dbo].[Addresses] (Id, EmployeeId,[City], [Street],[Zip]) VALUES (1,1, N'-', N'-', N'-')
+INSERT [dbo].[Addresses] (Id, EmployeeId,[City], [Street],[Zip]) VALUES (2,2, N'-', N'-', N'-')
+INSERT [dbo].[Addresses] (Id, EmployeeId,[City], [Street],[Zip]) VALUES (3,3, N'-', N'-', N'-')
+INSERT [dbo].[Addresses] (Id, EmployeeId,[City], [Street],[Zip]) VALUES (4,4, N'-', N'-', N'-')
+INSERT [dbo].[Addresses] (Id, EmployeeId,[City], [Street],[Zip]) VALUES (5,5, N'-', N'-', N'-')
+INSERT [dbo].[Addresses] (Id, EmployeeId,[City], [Street], [Zip]) VALUES (6,6, N'Bromma', N'Grimstahamnsvägen 4', N'168 39')
+INSERT [dbo].[Addresses] (Id, EmployeeId,[City], [Street], [Zip]) VALUES (7,7, N'Kramfors', N'Kramforsvägen 4', N'123 45')
 SET IDENTITY_INSERT [dbo].[Addresses] OFF
 
